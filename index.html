@@ -25,7 +25,7 @@ button{cursor:pointer}button.on{background:var(--card);border-color:var(--mut);f
 .b{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
 .c{min-height:58px;padding:3px;font-size:11px;line-height:1.35;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:4px;overflow-wrap:anywhere;border:.5px solid var(--bd);background:var(--bg)}
 .s{cursor:pointer}.a{background:var(--ab);border-color:var(--as);color:var(--af)}.d{background:var(--ob);border-color:var(--os);color:var(--of)}
-.k{background:var(--as);color:var(--bg);border-color:var(--as)}
+.k0{--rgb:127,119,221}.k1{--rgb:29,158,117}.k2{--rgb:216,90,48}.k3{--rgb:212,83,126}.k4{--rgb:55,138,221}.k5{--rgb:99,153,34}.k6{--rgb:186,117,23}.k7{--rgb:226,75,74}.c.s.d[class*=" k"]{background:rgba(var(--rgb),.28);border-color:rgba(var(--rgb),.5);color:var(--fg)}.c.a[class*=" k"]{background:rgba(var(--rgb),.42);border-color:rgba(var(--rgb),.65);color:var(--fg)}.c.u{background:rgba(128,128,128,.09);border-color:rgba(128,128,128,.22);color:var(--fg)}.c.a.g{background:rgba(128,128,128,.17);border-color:rgba(128,128,128,.32);color:var(--fg)}.t0{background:rgba(128,128,128,.2);border-color:rgba(128,128,128,.38);color:var(--fg)}.t1{background:rgba(205,127,50,.42);border-color:rgba(205,127,50,.75);color:var(--fg)}.t2{background:rgba(160,170,185,.5);border-color:rgba(140,150,165,.85);color:var(--fg)}.t3{background:rgba(255,196,0,.45);border-color:rgba(230,170,0,.85);color:var(--fg)}
 textarea{width:100%;min-height:80px;box-sizing:border-box}
 table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:.5px solid var(--bd);padding:6px;text-align:left}
 .m{color:var(--mut);font-size:13px}
@@ -42,16 +42,13 @@ table{border-collapse:collapse;width:100%;font-size:13px}th,td{border-bottom:.5p
 
 <div class="m" id="st" style="margin:0 0 6px"></div>
 <div id="g"></div>
-<p class="m" style="margin:6px 0 0">マスを右クリック(スマホは「条件」ボタンまたは長押し)すると、達成条件が表示されます。</p>
+<p class="m" style="margin:6px 0 0">マスを押すと達成条件が表示されます。「達成にする」で達成、「戻る」で閉じます。</p>
 <p class="m" id="tot"></p>
 <div class="row" style="margin-top:8px"><button id="del">このメンバーを削除</button></div>
-<details style="margin:20px 0 0"><summary style="cursor:pointer">CSV(Excel)で読み込む(チャート内容と達成条件を一括・全メンバー共通)</summary><p class="m">列の順番: シート,単価,要素名,項目名,達成条件。1行が1項目で、全部で192行(3シート×8要素×8項目)です。文字コードはUTF-8とShift_JISに対応しています。Excelでコピーした表を、下の欄にそのまま貼り付けても読み込めます。</p><div class="row"><input type="file" id="cf" accept=".csv,.tsv,.txt"></div><textarea id="cv" style="min-height:140px;font-size:12px" placeholder="CSV、またはExcelでコピーした表をここに貼り付け"></textarea><div class="row" style="margin-top:8px"><button id="cvl">この内容を読み込む</button><button id="cvd">現在の内容をCSVで保存</button><button id="cvs">現在の内容を表示(コピー用)</button></div><div class="m" id="cvm"></div></details>
-<details style="margin:12px 0 0"><summary style="cursor:pointer">チャート内容をテキストで読み込む(全メンバー共通)</summary><p class="m">書式: 「# 役割|単価」の見出しを3つ(PG・SE・PLの順)。その下に8行、「要素名|項目1/項目2/…/項目8」。チェックの記録は位置で紐づくため、文言を変えても残ります。</p><textarea id="ct" style="min-height:220px;font-size:12px"></textarea><div class="row" style="margin-top:8px"><button id="cx">現在の内容をテキスト化</button><button id="cl">この内容を読み込む</button><button id="cr">標準に戻す</button></div><div class="m" id="cm"></div></details>
-<details style="margin:12px 0 0"><summary style="cursor:pointer">達成条件をテキストで登録する(マスの右クリックで表示・全メンバー共通)</summary><p class="m">書式: 「# シート名」→「## 要素名」→その下に8行、「項目名|達成条件」。達成条件は1行で書きます。対応は先頭からの順番で決まるので、項目名は目印です。まず「現在の内容をテキスト化」を押すと、全項目入りの雛形が出ます。</p><textarea id="ca" style="min-height:220px;font-size:12px"></textarea><div class="row" style="margin-top:8px"><button id="cax">現在の内容をテキスト化</button><button id="cal">この内容を登録</button><button id="car">すべて削除</button></div><div class="m" id="cam"></div></details>
 <h2 style="font-size:15px;font-weight:500;margin:20px 0 6px">全員の進捗</h2>
 <div style="overflow-x:auto"><table id="ov"></table></div>
 </main>
-<div id="tip" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;z-index:20"><div style="background:var(--bg);color:var(--fg);border:.5px solid var(--bd);border-radius:12px;padding:16px 20px;max-width:420px;width:calc(100% - 48px)"><div id="tt" style="font-weight:500;margin:0 0 8px"></div><div id="tcr" style="white-space:pre-wrap;margin:0 0 10px;padding:8px 10px;border-radius:8px;background:var(--card)"></div><div id="tb" style="white-space:pre-wrap;margin:0 0 14px"></div><div class="row" style="justify-content:flex-end;margin:0"><button id="tc">閉じる</button></div></div></div>
+<div id="tip" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;z-index:20"><div style="background:var(--bg);color:var(--fg);border:.5px solid var(--bd);border-radius:12px;padding:16px 20px;max-width:420px;width:calc(100% - 48px)"><div id="tt" style="font-weight:500;margin:0 0 8px"></div><div id="tcr" style="white-space:pre-wrap;margin:0 0 10px;padding:8px 10px;border-radius:8px;background:var(--card)"></div><div id="tb" style="white-space:pre-wrap;margin:0 0 14px"></div><div class="row" style="justify-content:flex-end;margin:0"><button id="ta" class="on">達成にする</button><button id="tc">戻る</button></div></div></div>
 <div id="dlg" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center;z-index:20"><div role="alertdialog" style="background:var(--bg);color:var(--fg);border:.5px solid var(--bd);border-radius:12px;padding:16px 20px;max-width:320px;width:calc(100% - 48px)"><p id="dm" style="margin:0 0 14px"></p><div class="row" style="justify-content:flex-end;margin:0"><button id="dn">キャンセル</button><button id="dy" class="on">取り消す</button></div></div></div>
 <script>
 /* スタンドアロン用の保存機能: Claude上で開かれていない場合だけ、ブラウザ内(localStorage)にデータを保存します */
@@ -123,85 +120,41 @@ return col.doc(id).set({name:m.name,checks:m.checks||{},memos:m.memos||{},order:
 function cnt(m,l,i){var n=0;for(var s=0;s<8;s++)if((m.checks||{})[l+"-"+i+"-"+s])n++;return n}
 function lay(m,l){var n=0;for(var i=0;i<8;i++)n+=cnt(m,l,i);return n}
 function ordr(m,l){var ck=m.checks||{},seen={},o=(m.order||[]).filter(function(k){if(!ck[k]||seen[k])return false;seen[k]=1;return true});var rest=Object.keys(ck).filter(function(k){return!seen[k]}).sort(function(a,b){return String(ck[a]).localeCompare(String(ck[b]))||(a<b?-1:1)});return o.concat(rest).filter(function(k){return l==null||k.indexOf(l+"-")==0})}
-function edp(m){var p=$("edp");p.textContent="";p.style.display=ed&&m?"":"none";if(!ed||!m)return;
-if(!edk){h("div","m","編集したいマスを押してください(この間はチェックは付きません)。メンバーごとの設定で、他のメンバーには影響しません。",p);return}
-var a=edk.split("-"),it=D[a[0]].items[a[1]].split("|"),orig=a.length>2?it[1].split("/")[a[2]]:it[0];
-h("div","m","元の項目: "+orig,p);var i=h("input","","",p);i.value=(m.custom||{})[edk]||orig;i.style.cssText="width:100%;box-sizing:border-box;margin:6px 0";
-var r=h("div","row","",p),ok=h("button","","反映",r),rs=h("button","","元に戻す",r);
-ok.onclick=function(){var v=i.value.trim();m.custom=m.custom||{};if(!v||v==orig)delete m.custom[edk];else m.custom[edk]=v;edk=null;render();save(m)};
-rs.onclick=function(){if(m.custom)delete m.custom[edk];edk=null;render();save(m)}}
 var T={'組み込み':['0-1|言語・RTOSの習得|C言語の基礎/ポインタ・メモリ管理/ビット操作/C++基礎/RTOS基礎/割り込み処理/レジスタ操作/データシート読解','0-2||単体テスト仕様書/実機テスト/境界値・タイミング/ロジアナ・オシロ/テスト環境構築/HWとSWの切り分け/ログ・トレース解析/エビデンス取得','0-3||基本情報技術者/ETEC 3級/ETEC 2級/C言語の資格学習/電子回路の基礎/過去問演習/学習時間の確保/応用情報に着手','0-5|開発環境・ツール|クロスコンパイル/デバッガ(JTAG)/Make・CMake/Git運用/書き込みツール/シリアルログ/静的解析(MISRA)/Linuxコマンド','0-6|回路・通信基礎|回路図の読み方/電源・グランド/GPIO/I2C・SPI/UART/CAN/タイミングチャート/計測器の基礎','1-0||ハードとソフトの分担/要求仕様の分析/リアルタイム制約/状態遷移設計/インタフェース仕様書/優先順位付け/要件レビュー/変更管理','1-2|ソフトウェア構成設計|タスク分割設計/割り込み設計/メモリ配置設計/状態遷移図/ドライバ設計/HAL設計/ミドルウェア選定/設計パターン','1-3||応用情報技術者/ETEC 1級/組込みスペシャリスト/機能安全の基礎/電子回路・計測/ネットワーク基礎/高度試験に着手/学習計画','1-6||リアルタイム性/消費電力/メモリ使用量/信頼性・耐ノイズ/機能安全/セキュアブート/規格認証対応/量産・保守設計','2-2||品質基準策定/実機評価計画/環境・信頼性試験/機能安全の品質活動/バグ分析/再発防止策/量産移行判定/リリース判定','2-7||マイコン・SoC選定/OS選定/部品調達リスク/ハードとソフトの責務分担/PoC・試作/標準化/ベンダー評価/将来拡張'],
 '基幹アプリ':['0-1||Java・C#の基礎/オブジェクト指向/FW(Spring・.NET)/バッチ処理の実装/帳票・ファイル入出力/例外・ログ設計/COBOL基礎/コードリーディング','0-2||単体テスト仕様書/結合テスト観点/業務シナリオ/テストデータ作成/エビデンス取得/不具合票/回帰テスト/再現手順の整理','0-3||基本情報技術者/Java Silver/Oracle Silver/簿記3級/業務システムの基礎/過去問演習/学習時間の確保/応用情報に着手','0-5|開発環境・運用|Git・SVN運用/ビルド・デプロイ/ジョブ管理(JP1等)/IDE設定/Linuxコマンド/環境構築手順書/リリース作業/運用手順の理解','0-6||SELECT・JOIN/集計・サブクエリ/更新系とトランザクション/インデックス/実行計画/ストアドプロシージャ/排他制御/データ移行','1-0||業務ヒアリング/現行業務の整理/機能一覧・画面帳票設計/外部連携設計/データ移行方針/優先順位付け/要件レビュー/変更管理','1-2||ER設計/テーブル定義/バッチ設計/帳票・ファイル連携/トランザクション設計/排他制御/インデックス設計/システム構成図','1-3||応用情報技術者/データベーススペシャリスト/Oracle Gold/簿記2級/業務知識の体系化/システムアーキテクト試験/プロジェクトマネージャ試験/学習計画','1-6||バッチ処理時間/可用性・業務継続/セキュリティ・監査/バックアップ・保全/運用・ジョブ設計/移行・切替計画/法改正・制度対応/障害対応設計','2-2||品質基準策定/結合・総合テスト計画/業務受入テスト支援/移行リハーサル/バグ分析/障害の再発防止/本番判定/リリース判定','2-7||既存システムの調査/刷新方針・段階移行/パッケージかスクラッチか/基盤・DB選定/業務知識の組織化/標準化/ベンダー評価/技術的負債管理'],
 'WEBアプリ':['0-1||JavaScript・TypeScript基礎/HTML・CSS/React等のFW/REST API/非同期処理/認証・認可/バックエンドの基礎/コードリーディング','0-5||commit・branch運用/PR作成/コンフリクト解消/Docker基礎/CI・CD基礎/AWS基礎/ブラウザ開発者ツール/Linuxコマンド','1-6||表示速度・性能/可用性・スケール/Webセキュリティ/ブラウザ互換・レスポンシブ/監視・ログ設計/バックアップ/CDN・キャッシュ/障害対応設計']};
 function tplMap(n,ls){var o={};(T[n]||[]).forEach(function(e){var a=e.split('|'),k=a[0].split('-');if(ls.indexOf(+k[0])<0)return;if(a[1])o[a[0]]=a[1];a[2].split('/').forEach(function(v,s){o[a[0]+'-'+s]=v})});return o}
 function ask(msg,ok,lb){var d=$("dlg");$("dm").textContent=msg;$("dy").textContent=lb||"取り消す";d.style.display="flex";$("dy").onclick=function(){d.style.display="none";ok()};$("dn").onclick=function(){d.style.display="none"};$("dn").focus()}
-function hint(c,main,sub,m,key){var show=function(e){if(e&&e.preventDefault)e.preventDefault();explain(D[cur],main,sub,m&&m.tpl,key)},t=null;c.addEventListener("contextmenu",show);c.addEventListener("touchstart",function(){t=setTimeout(function(){t=null;c._lp=1;show()},550)},{passive:true});["touchend","touchmove","touchcancel"].forEach(function(n){c.addEventListener(n,function(e){clearTimeout(t);if(c._lp&&n=="touchend"){e.preventDefault();c._lp=0}},{passive:false})})}
-function explain(L,main,sub,tpl,key0){if(!sub)return;var cr=CR[key0];$("tt").textContent=sub;$("tcr").textContent=cr?"達成条件\n"+cr:"達成条件: 未設定";$("tb").style.display="none";$("tip").style.display="flex"}
+function hint(c,main,sub,m,key){var show=function(e){if(e&&e.preventDefault)e.preventDefault();explain(D[cur],main,sub,m&&m.tpl,key,m)},t=null;c.addEventListener("contextmenu",show);c.addEventListener("touchstart",function(){t=setTimeout(function(){t=null;c._lp=1;show()},550)},{passive:true});["touchend","touchmove","touchcancel"].forEach(function(n){c.addEventListener(n,function(e){clearTimeout(t);if(c._lp&&n=="touchend"){e.preventDefault();c._lp=0}},{passive:false})})}
+function explain(L,main,sub,tpl,key0,m){if(!sub)return;var cr=CR[key0],on=m&&(m.checks||{})[key0];$("tt").textContent=main+" / "+sub;$("tcr").textContent=cr?"達成条件\n"+cr:"達成条件: 未設定";$("tb").style.display="none";var ta=$("ta");ta.style.display=m?"":"none";ta.textContent=on?"達成を取り消す":"達成にする";ta.onclick=function(){var t=members.filter(function(x){return x.id==m.id})[0]||m;t.checks=t.checks||{};if(t.checks[key0]){t.order=ordr(t).filter(function(z){return z!=key0});delete t.checks[key0]}else{t.order=ordr(t);t.checks[key0]=today();t.order.push(key0)}$("tip").style.display="none";render();save(t)};$("tip").style.display="flex"}
 $("tc").onclick=function(){$("tip").style.display="none"};$("tip").onclick=function(e){if(e.target==this)this.style.display="none"};
 function parseTxt(t){var L=[],cu=null,er=null;t.split(/\r?\n/).forEach(function(ln,i){ln=ln.trim();if(!ln||er)return;if(ln.charAt(0)=="#"){var a=ln.replace(/^#\s*/,"").split("|");if(a.length!=2||!a[0].trim()||!a[1].trim()){er=(i+1)+"行目: 見出しは「# 役割|単価」の形式にしてください";return}cu={role:a[0].trim(),price:a[1].trim(),items:[]};cu.tab="Layer "+(L.length+1)+" "+cu.role+"("+cu.price+")";L.push(cu);return}
 if(!cu){er=(i+1)+"行目: 先に「# 役割|単価」の見出しが必要です";return}var b=ln.split("|");if(b.length!=2||!b[0].trim()){er=(i+1)+"行目: 「要素名|項目1/項目2/…/項目8」の形式にしてください";return}var n=b[1].split("/").length;if(n!=8){er=(i+1)+"行目: 項目は8つ必要です(現在"+n+"つ)";return}cu.items.push(ln)});
 if(!er){if(L.length!=3)er="見出し(#)は3つ必要です(現在"+L.length+"つ)";else L.forEach(function(l){if(!er&&l.items.length!=8)er=l.role+": 要素は8行必要です(現在"+l.items.length+"行)"})}
 return er?{err:er}:{D:L}}
-function toTxt(){return D.map(function(l){return"# "+l.role+"|"+l.price+"\n"+l.items.join("\n")}).join("\n\n")}
 function fillLy(){var s=$("ly"),v=s.value;s.textContent="";D.forEach(function(l,i){var o=h("option","",l.tab,s);o.value=i});if(v)s.value=v}
-$("cx").onclick=function(){$("ct").value=toTxt();$("cm").textContent="現在の内容を表示しました。編集して「読み込む」を押してください。"};
-$("cl").onclick=function(){var p=parseTxt($("ct").value);if(p.err){$("cm").textContent="読み込めません: "+p.err;return}if(!cfg){$("cm").textContent="データ保存が使えません";return}ask("チャート内容を置き換えます(全メンバー共通)。チェックの記録は残ります。よろしいですか?",function(){cfg.doc("chart").set({text:$("ct").value}).then(function(){$("cm").textContent="読み込みました"}).catch(function(e){$("cm").textContent="保存できませんでした: "+((e&&e.message)||"")})},"置き換える")};
-$("cr").onclick=function(){if(!cfg)return;ask("標準の内容に戻します。よろしいですか?",function(){cfg.doc("chart").delete().then(function(){$("cm").textContent="標準に戻しました"})},"戻す")};
 function parseCr(t){var M={},l=-1,i=-1,s=-1,er=null;t.split(/\r?\n/).forEach(function(ln,n){if(er)return;var r=ln.trim();if(!r)return;var no=(n+1)+"行目: ";
 if(r.charAt(0)=="#"&&r.charAt(1)!="#"){l++;i=-1;s=-1;if(l>2)er=no+"シートの見出し(#)は3つまでです";return}
 if(r.slice(0,2)=="##"){if(l<0){er=no+"先に「# シート名」の見出しが必要です";return}i++;s=-1;if(i>7){er=no+"要素(##)は1シートに8つまでです";return}var v=r.replace(/^##\s*/,"").split("|").slice(1).join("|").trim();if(v)M[l+"-"+i]=v;return}
 if(i<0){er=no+"先に「## 要素名」の見出しが必要です";return}s++;if(s>7){er=no+"項目は1要素に8つまでです";return}var v2=r.split("|").slice(1).join("|").trim();if(v2)M[l+"-"+i+"-"+s]=v2});
 return er?{err:er}:{map:M}}
-function toCr(){return D.map(function(L,l){return"# "+L.role+"\n"+L.items.map(function(it,i){var a=it.split("|");return"## "+a[0]+"\n"+a[1].split("/").map(function(x,s){return x+"|"+(CR[l+"-"+i+"-"+s]||"")}).join("\n")}).join("\n")}).join("\n\n")}
-$("cax").onclick=function(){$("ca").value=toCr();$("cam").textContent="現在の内容を表示しました。「|」の右側に達成条件を書いて、「登録」を押してください。"};
-$("cal").onclick=function(){var p=parseCr($("ca").value);if(p.err){$("cam").textContent="登録できません: "+p.err;return}if(!cfg){$("cam").textContent="データ保存が使えません";return}var n=Object.keys(p.map).length;ask("達成条件を登録します("+n+"件・全メンバー共通)。よろしいですか?",function(){cfg.doc("criteria").set({text:$("ca").value}).then(function(){$("cam").textContent="登録しました("+n+"件)"}).catch(function(e){$("cam").textContent="保存できませんでした: "+((e&&e.message)||"")})},"登録する")};
-$("car").onclick=function(){if(!cfg)return;ask("登録済みの達成条件をすべて削除します。よろしいですか?",function(){cfg.doc("criteria").delete().then(function(){$("cam").textContent="削除しました"})},"削除する")};
-var DQ=String.fromCharCode(34);
-function parseTbl(t){t=t.replace(/^\uFEFF/,"");var d=(t.split(/\r?\n/)[0]||"").indexOf("\t")>=0?"\t":",",rows=[],row=[],f="",q=false;for(var i=0;i<t.length;i++){var c=t.charAt(i);if(q){if(c==DQ){if(t.charAt(i+1)==DQ){f+=DQ;i++}else q=false}else f+=c}else if(c==DQ&&f==="")q=true;else if(c==d){row.push(f);f=""}else if(c=="\n"||c=="\r"){if(c=="\r"&&t.charAt(i+1)=="\n")i++;row.push(f);rows.push(row);row=[];f=""}else f+=c}if(f!==""||row.length){row.push(f);rows.push(row)}return rows}
-function csvToTxt(t){var rows=parseTbl(t),L=[],er=null,one=function(x){return String(x||"").replace(/\s*[\r\n]+\s*/g," ").trim()};
-rows.forEach(function(r,n){if(er)return;if(r.every(function(x){return!String(x).trim()}))return;if(one(r[0])=="シート")return;var no=(n+1)+"行目: ",sh=one(r[0]),pr=one(r[1]),el=one(r[2]),sb=one(r[3]),cd=one(r[4]);
-if(!sh||!el||!sb){er=no+"シート・要素名・項目名は必須です";return}
-if(/[\/|]/.test(el+sb)){er=no+"要素名・項目名に「/」「|」は使えません";return}
-var y=L.filter(function(x){return x.sh==sh})[0];if(!y){y={sh:sh,pr:pr,els:[]};L.push(y)}if(!y.pr)y.pr=pr;
-var e=y.els.filter(function(x){return x.n==el})[0];if(!e){e={n:el,ec:"",it:[]};y.els.push(e)}e.it.push({n:sb,c:cd})});
-if(er)return{err:er};
-var ch=[],cr=[];L.forEach(function(y){if(!y.pr&&!er)er=y.sh+": 単価が空です";ch.push("# "+y.sh+"|"+y.pr);cr.push("# "+y.sh);y.els.forEach(function(e){ch.push(e.n+"|"+e.it.map(function(x){return x.n}).join("/"));cr.push("## "+e.n);e.it.forEach(function(x){cr.push(x.n+"|"+x.c)})})});
-if(er)return{err:er};
-var p=parseTxt(ch.join("\n"));if(p.err)return{err:p.err.replace(/^\d+行目: /,"")+"(シート・要素・項目の数を確認してください)"};
-return{chart:ch.join("\n"),crit:cr.join("\n")}}
-function toCsv(d){d=d||",";var q=function(x){x=String(x==null?"":x);return x.indexOf(d)>=0||x.indexOf(DQ)>=0||/[\r\n]/.test(x)?DQ+x.split(DQ).join(DQ+DQ)+DQ:x},o=[["シート","単価","要素名","項目名","達成条件"].join(d)];
-D.forEach(function(L,l){L.items.forEach(function(it,i){var a=it.split("|");a[1].split("/").forEach(function(x,s){o.push([L.role,L.price,a[0],x,CR[l+"-"+i+"-"+s]||""].map(q).join(d))})})});return o.join("\r\n")}
-$("cf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var b=r.result,s;try{s=new TextDecoder("utf-8",{fatal:true}).decode(b)}catch(e){try{s=new TextDecoder("shift_jis").decode(b)}catch(e2){$("cvm").textContent="文字コードを判別できません。UTF-8で保存し直してください。";return}}$("cv").value=s;$("cvm").textContent=f.name+" を読み込みました。内容を確認して「この内容を読み込む」を押してください。"};r.readAsArrayBuffer(f)};
-$("cvl").onclick=function(){var p=csvToTxt($("cv").value);if(p.err){$("cvm").textContent="読み込めません: "+p.err;return}if(!cfg){$("cvm").textContent="データ保存が使えません";return}ask("チャート内容と達成条件を置き換えます(全メンバー共通)。チェックの記録は残ります。よろしいですか?",function(){Promise.all([cfg.doc("chart").set({text:p.chart}),cfg.doc("criteria").set({text:p.crit})]).then(function(){$("cvm").textContent="読み込みました"}).catch(function(e){$("cvm").textContent="保存できませんでした: "+((e&&e.message)||"")})},"読み込む")};
-$("cvd").onclick=async function(){var dl=await claude.use("downloads");if(!dl){$("cvm").textContent="保存が使えません。「表示(コピー用)」を使ってください。";return}try{await dl.save({filename:"mandala_chart.csv",data:new Blob(["\uFEFF"+toCsv()],{type:"text/csv"})});$("cvm").textContent="保存しました"}catch(e){if(!e||e.code!="declined")$("cvm").textContent="保存できませんでした: "+((e&&(e.message||e.code))||"")}};
-$("cvs").onclick=function(){$("cv").value=toCsv("\t");$("cvm").textContent="表を表示しました。全体をコピーして、Excelに貼り付けられます。"};
 var openK=null;
 var listMode=false;function NR(){return listMode}
 try{matchMedia("(max-width:640px)").addEventListener("change",function(){render()})}catch(e){}
-function list(m,it,g){g.style.display="block";var L=D[cur],top=h("div","","",g);top.style.cssText="padding:10px 12px;margin:0 0 8px;border-radius:8px;background:var(--ab);color:var(--af);display:flex;justify-content:space-between;align-items:center";h("span","",L.role+" "+L.price,top).style.fontWeight="500";h("span","",lay(m,cur)+" / 64",top);
-it.forEach(function(x,i){var k=cur+"-"+i,open=openK==k,n=cnt(m,cur,i),box=h("div","","",g);box.style.cssText="border:.5px solid var(--bd);border-radius:8px;margin:0 0 8px;overflow:hidden";
+function list(m,it,g){g.style.display="block";var L=D[cur],top=h("div","t"+tier(lay(m,cur)),"",g);top.style.cssText="padding:10px 12px;margin:0 0 8px;border-radius:8px;display:flex;justify-content:space-between;align-items:center";h("span","",L.role+" "+L.price,top).style.fontWeight="500";h("span","",lay(m,cur)+" / 64",top);
+it.forEach(function(x,i){var k=cur+"-"+i,open=openK==k,n=cnt(m,cur,i),box=h("div","k"+i,"",g);box.style.cssText="border:.5px solid var(--bd);border-left:5px solid "+(n>=BL?"rgba(var(--rgb),.75)":"rgba(128,128,128,.4)")+";border-radius:8px;margin:0 0 8px;overflow:hidden";
 var hd=h("div","","",box);hd.style.cssText="padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;background:var(--card)";hd.setAttribute("role","button");hd.tabIndex=0;h("span","",x.t,hd).style.fontWeight="500";h("span","m",n+" / 8 "+(open?"▲":"▼"),hd);
 var tg=function(){openK=open?null:k;render()};hd.onclick=tg;hd.onkeydown=function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();tg()}};
-if(open)x.s.forEach(function(sub,s){var key=k+"-"+s,on=(m.checks||{})[key],r=h("div","","",box);r.style.cssText="padding:12px;display:flex;align-items:center;gap:10px;border-top:.5px solid var(--bd);cursor:pointer;"+(on?"background:var(--ob);color:var(--of)":"");r.setAttribute("role","button");r.tabIndex=0;
+if(open)x.s.forEach(function(sub,s){var key=k+"-"+s,on=(m.checks||{})[key],r=h("div","","",box);r.style.cssText="padding:12px;display:flex;align-items:center;gap:10px;border-top:.5px solid var(--bd);cursor:pointer;"+(on?"background:rgba(var(--rgb),.28)":"");r.setAttribute("role","button");r.tabIndex=0;
 h("span","",on?"✓":"○",r).style.cssText="font-size:18px;width:20px;text-align:center";h("span","",sub,r).style.flex="1";
 if(on){var no=ordr(m,cur).indexOf(key)+1;h("span","",(no?"#"+no+" ":"")+(typeof on=="string"?fmt(on):""),r).style.fontSize="11px"}
-var bi=h("button","","条件",r);bi.style.cssText="padding:4px 10px;font-size:13px;flex:none";bi.onclick=function(e){e.stopPropagation();explain(D[cur],x.t,sub,m.tpl,key)};
-var f=function(){m.checks=m.checks||{};if(m.checks[key]){ask("「"+sub+"」のチェックを取り消しますか?",function(){var t=members.filter(function(y){return y.id==m.id})[0]||m;t.order=ordr(t).filter(function(z){return z!=key});delete t.checks[key];render();save(t)});return}m.order=ordr(m);m.checks[key]=today();m.order.push(key);render();save(m)};
+var f=function(){explain(D[cur],x.t,sub,m.tpl,key,m)};
 r.onclick=f;r.onkeydown=function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();f()}};hint(r,x.t,sub,m,key)})})}
+var TN=["","ブロンズ","シルバー","ゴールド"],TH=[42,48,55],BL=6;
+function tier(n){return n>=TH[2]?3:n>=TH[1]?2:n>=TH[0]?1:0}
 function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
 function fmt(s){var a=s.split("-");return a.length==3?a[0].slice(2)+"/"+a[1]+"/"+a[2]:""}
 function lays(m){if(m.layers&&m.layers.length)return m.layers.slice().sort();var s={};Object.keys(m.checks||{}).forEach(function(k){s[k.split("-")[0]]=1});var a=Object.keys(s).map(Number).sort();return a.length?a:[0]}
-function sug(m){var g=$("sg");g.textContent="";var L=D[cur],ck=m.checks||{},c=[];
-L.items.forEach(function(x,i){var n=cnt(m,cur,i);if(n==8)return;var s=0;while(ck[cur+"-"+i+"-"+s])s++;c.push({i:i,s:s,n:n,sc:n-s*0.1})});
-var box=function(t,r){var d=h("div","","",g);d.style.cssText="border:.5px solid var(--bd);border-radius:8px;padding:8px 12px;margin:0 0 6px";var a=h("div","",t,d);a.style.fontWeight="500";h("div","m",r,d)};
-if(!c.length){box("この階層はすべて達成しています",cur<2?"次の階層のタブに進みましょう。":"最上位の階層まで達成です。");return}
-c.sort(function(a,b){return b.sc-a.sc});
-c.slice(0,3).forEach(function(x,k){var it=L.items[x.i].split("|"),sub=it[1].split("/")[x.s];var cu2=m.custom||{};sub=cu2[cur+"-"+x.i+"-"+x.s]||sub;it[0]=cu2[cur+"-"+x.i]||it[0];
-var r=x.n==0?"このブロックはまだ未着手です。ブロック内で最も基礎寄りの項目なので、入口として取り組みやすいです。":"『"+it[0]+"』は"+x.n+" / 8まで進んでおり、あと"+(8-x.n)+"マスで完成します。ブロック内で最も手前(基礎寄り)の未達成項目なので、次の一歩に向いています。";
-box((k+1)+". "+sub+"("+it[0]+")",r)});
-var t=lay(m,cur);
-if(t>=45&&cur<2)h("p","m","この階層は7割以上達成しています。次の階層の先頭ブロックにも並行して着手できます。",g);
-if(cur>0&&lays(m).indexOf(cur-1)>=0&&lay(m,cur-1)<45)h("p","m","下位階層の達成率が7割未満です。土台の補強も並行して検討してください。",g)}
 
 fillLy();
 [["","ひな形なし(標準)"],["組み込み","組み込み"],["基幹アプリ","基幹アプリ"],["WEBアプリ","WEBアプリ"]].forEach(function(t){[$("tp")].forEach(function(s){var o=h("option","",t[1],s);o.value=t[0]})});
@@ -223,11 +176,11 @@ var L=D[cur],it=L.items.map(function(s){var a=s.split("|");return{t:a[0],s:a[1].
 if(NR()){list(m,it,g)}else for(var b=0;b<9;b++){var blk=h("div","b","",g),q=P[b];
 for(var p=0;p<9;p++){
 if(b==4){
-if(p==4){var c=h("div","c k","",blk);h("span","",L.role,c);h("span","",L.price,c).style.cssText="font-size:18px;font-weight:500";h("span","",lay(m,cur)+" / 64",c)}
-else{var r=P[p],c=h("div","c a","",blk);h("span","",it[r].t,c).style.fontWeight="500";h("span","",cnt(m,cur,r)+" / 8",c);hint(c,it[r].t,null,m,cur+"-"+r)}
-}else if(p==4){var c=h("div","c a","",blk);h("span","",it[q].t,c).style.fontWeight="500";h("span","",cnt(m,cur,q)+" / 8",c);hint(c,it[q].t,null,m,cur+"-"+q)}
-else(function(q,s){var k=cur+"-"+q+"-"+s,on=(m.checks||{})[k];var c=h("div","c s"+(on?" d":""),(on?"":"")+it[q].s[s],blk);if(on){var no=ordr(m,cur).indexOf(k)+1;h("span","",no?"#"+no:"✓",c).style.fontWeight="500";if(typeof on=="string"){h("span","",fmt(on),c);c.title=fmt(on)+"に達成"}}hint(c,it[q].t,it[q].s[s],m,k);c.tabIndex=0;c.setAttribute("role","button");
-var f=function(){if(ed){edk=k;render();return}m.checks=m.checks||{};if(m.checks[k]){ask("「"+it[q].s[s]+"」のチェックを取り消しますか?",function(){var t=members.filter(function(x){return x.id==m.id})[0]||m;t.order=ordr(t).filter(function(x){return x!=k});delete t.checks[k];render();save(t)});return}m.order=ordr(m);m.checks[k]=today();m.order.push(k);render();save(m)};
+if(p==4){var nn=lay(m,cur),tr=tier(nn),c=h("div","c t"+tr,"",blk);h("span","",L.role+(tr?"・"+TN[tr]:""),c);h("span","",L.price,c).style.cssText="font-size:18px;font-weight:500";h("span","",nn+" / 64",c);if(tr<3)h("span","","あと"+(TH[tr]-nn)+"マスで"+TN[tr+1],c)}
+else{var r=P[p],c=h("div","c a "+(cnt(m,cur,r)>=BL?"k"+r:"g"),"",blk);h("span","",it[r].t,c).style.fontWeight="500";h("span","",cnt(m,cur,r)+" / 8",c);hint(c,it[r].t,null,m,cur+"-"+r)}
+}else if(p==4){var c=h("div","c a "+(cnt(m,cur,q)>=BL?"k"+q:"g"),"",blk);h("span","",it[q].t,c).style.fontWeight="500";h("span","",cnt(m,cur,q)+" / 8",c);hint(c,it[q].t,null,m,cur+"-"+q)}
+else(function(q,s){var k=cur+"-"+q+"-"+s,on=(m.checks||{})[k];var c=h("div","c s "+(on?"k"+q+" d":"u"),(on?"":"")+it[q].s[s],blk);if(on){var no=ordr(m,cur).indexOf(k)+1;h("span","",no?"#"+no:"✓",c).style.fontWeight="500";if(typeof on=="string"){h("span","",fmt(on),c);c.title=fmt(on)+"に達成"}}hint(c,it[q].t,it[q].s[s],m,k);c.tabIndex=0;c.setAttribute("role","button");
+var f=function(){explain(D[cur],it[q].t,it[q].s[s],m.tpl,k,m)};
 c.onclick=f;c.onkeydown=function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();f()}}})(q,P[p])}}
 $("tot").textContent=lay(m,cur)+" / 64 マス達成("+Math.round(lay(m,cur)/64*100)+"%)";
 
